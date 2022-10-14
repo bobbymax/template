@@ -1,42 +1,29 @@
 import { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import { routes } from "./routes";
 import GuardRoute from "./template/components/GuardRoute";
 import ProtectedRoute from "./template/components/ProtectedRoute";
-import AccountCode from "./views/accounts/AccountCode";
-import Dashboard from "./views/Dashboard";
-import Login from "./views/Login";
 
 const App = () => {
   return (
     <Suspense fallback={<p>Loading...</p>}>
       <Routes>
-        <Route
-          exact
-          path="/auth/login"
-          element={
-            <GuardRoute>
-              <Login />
-            </GuardRoute>
-          }
-        />
-        <Route
-          exact
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          exact
-          path="/account-codes"
-          element={
-            <ProtectedRoute>
-              <AccountCode />
-            </ProtectedRoute>
-          }
-        />
+        {routes.guest.map((pg, i) => (
+          <Route
+            exact
+            key={i}
+            path={pg.url}
+            element={<GuardRoute>{pg.element}</GuardRoute>}
+          />
+        ))}
+        {routes.protected.map((pg, i) => (
+          <Route
+            exact
+            key={i}
+            path={pg.url}
+            element={<ProtectedRoute>{pg.element}</ProtectedRoute>}
+          />
+        ))}
       </Routes>
     </Suspense>
   );
