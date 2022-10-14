@@ -1,0 +1,68 @@
+@import url("./style.css");
+
+.guard {
+  display: grid;
+  width: 100%;
+  margin: 0 auto;
+  grid-template-columns: 50% 50%;
+}
+
+.left-side {
+  background-color: var(--color-white);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.right-side {
+  background-color: var(--color-background);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.bg-back img {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.auth {
+  background-color: var(--color-white);
+  width: 70%;
+  margin: 0 auto;
+  padding: 2.5rem 1.8rem;
+  border-radius: var(--border-radius-2);
+  box-shadow: var(--box-shadow);
+}
+
+.label-font {
+  font-size: 1.045rem;
+  text-transform: uppercase;
+  color: var(--color-dark);
+  margin-bottom: 0.58rem;
+}
+
+.form-login .row > div {
+  margin-bottom: 1.6rem;
+}
+
+.custom-btn {
+  display: block;
+  background-color: var(--color-primary);
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: var(--card-border-radius);
+  color: var(--color-white);
+}
+
+.custom-btn span {
+  font-size: 1rem;
+  margin-right: 0.6rem;
+}
+
+.brand {
+  width: 30%;
+  margin: 0 auto 1.98rem auto;
+}
