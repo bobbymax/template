@@ -39,41 +39,43 @@ const Login = () => {
   };
 
   return (
-    <div className="form-login">
-      <form onSubmit={handleSubmit}>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <TextInput
-                label="Membership Number"
-                name="membership_no"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                size="lg"
-                placeholder="Enter Email Address"
-              />
-            </div>
-            <div className="col-md-12">
-              <TextInput
-                label="Password"
-                name="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                size="lg"
-                placeholder="Enter Password"
-              />
-            </div>
-            <div className="col-md-12 mt-3">
-              <button type="submit" className="custom-btn">
-                <span className="material-icons-sharp">login</span>
-                LOGIN
-              </button>
+    <>
+      <div className="form-login">
+        <form onSubmit={handleSubmit}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <TextInput
+                  label="Membership Number"
+                  name="membership_no"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  size="lg"
+                  placeholder="Enter Email Address"
+                />
+              </div>
+              <div className="col-md-12">
+                <TextInput
+                  label="Password"
+                  name="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  size="lg"
+                  placeholder="Enter Password"
+                />
+              </div>
+              <div className="col-md-12 mt-3">
+                <button type="submit" className="custom-btn">
+                  <span className="material-icons-sharp">login</span>
+                  LOGIN
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 };
 

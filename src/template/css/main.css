@@ -50,7 +50,7 @@
 
 .custom-btn {
   display: block;
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-variant);
   width: 100%;
   padding: 0.8rem;
   border-radius: var(--card-border-radius);
@@ -60,6 +60,14 @@
 .custom-btn span {
   font-size: 1rem;
   margin-right: 0.6rem;
+}
+
+.custom-btn:hover {
+  background-color: var(--color-primary);
+}
+
+.custom-btn:disabled {
+  background-color: var(--color-primary);
 }
 
 .brand {
