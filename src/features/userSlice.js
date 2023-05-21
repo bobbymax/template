@@ -19,17 +19,18 @@ export const userSlice = createSlice({
       state.value.token = action.payload.data.token;
       state.value.user = action.payload.data.user;
     },
-    updateUser: (state, action) => {
-      state.value.user = action.payload.data;
-    },
     disembark: (state) => {
       localStorage.removeItem("token");
       state.value = initialState.value;
+    },
+    updateLoggedInAuth: (state, action) => {
+      state.value.user = action.payload.data;
     },
   },
 });
 
 const userReducer = userSlice.reducer;
-export const { authenticate, updateUser, disembark } = userSlice.actions;
+export const { authenticate, disembark, updateLoggedInAuth } =
+  userSlice.actions;
 
 export default userReducer;

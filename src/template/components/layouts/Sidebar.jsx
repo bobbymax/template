@@ -1,17 +1,34 @@
-import React from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/ncdmb-logo.png";
 import { useStateContext } from "../../../context/ContextProvider";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { splitRoute } from "../../../services/helpers";
+import { useDispatch } from "react-redux";
+import { disembark } from "../../../features/userSlice";
 
 const Sidebar = () => {
-  const { openSideMenu } = useStateContext();
+  const { openSideMenu, navigation } = useStateContext();
+  const { pathname } = useLocation();
+  const [url, setUrl] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    dispatch(disembark());
+    navigate("/");
+  };
+
+  useEffect(() => {
+    setUrl(splitRoute(pathname));
+  }, [pathname]);
+
   return (
     <aside>
       <div className="top">
         <div className="logo">
           <img src={logo} alt="Brand Logo" />
-          <h2>
-            NC<span className="warning">DMB</span>
-          </h2>
         </div>
         <div
           className="close"
@@ -22,31 +39,31 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="sidebar">
-        <a href="#" className="active">
-          <span className="material-icons-sharp">grid_view</span>
-          <h3>Dashboard</h3>
-        </a>
-        <a href="#">
-          <span className="material-icons-sharp">people</span>
-          <h3>Staff</h3>
-        </a>
-        <a href="#">
-          <span className="material-icons-sharp">receipt_long</span>
-          <h3>Report</h3>
-        </a>
-        <a href="#">
-          <span className="material-icons-sharp">insights</span>
+        <Link
+          to="/"
+          className={`${url === "/" ? "active" : ""}`}
+          title="Insights"
+        >
+          <span className="material-icons-sharp">dashboard</span>
           <h3>Insights</h3>
-          <span className="message-count">26</span>
-        </a>
-        <a href="#">
-          <span className="material-icons-sharp">mail_outline</span>
-          <h3>Mail</h3>
-        </a>
-        <a href="#">
+        </Link>
+        {navigation
+          .filter((nav) => nav?.type === "application")
+          .map((nav, i) => (
+            <Link
+              to={nav.url}
+              key={i}
+              className={nav.url === url ? "active" : ""}
+              title={nav.name}
+            >
+              <span className="material-icons-sharp">{nav.icon}</span>
+              <h3>{nav.name}</h3>
+            </Link>
+          ))}
+        <Link to="#" onClick={logout}>
           <span className="material-icons-sharp">logout</span>
           <h3>Logout</h3>
-        </a>
+        </Link>
       </div>
     </aside>
   );

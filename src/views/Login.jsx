@@ -3,20 +3,22 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../controllers/guard";
 import { authenticate } from "../features/userSlice";
-import { TextInput } from "../template/components/forms/Inputs";
+import { Button, TextInput } from "../template/components/forms/Inputs";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const data = {
-      membership_no: username,
+      email,
       password,
     };
 
@@ -25,15 +27,18 @@ const Login = () => {
         .then((res) => {
           setTimeout(() => {
             dispatch(authenticate(res.data));
-            setUsername("");
+            setEmail("");
             setPassword("");
+            setLoading(false);
             navigate("/");
           }, 2000);
         })
         .catch((err) => {
+          setLoading(false);
           console.log(err.message);
         });
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -46,12 +51,14 @@ const Login = () => {
             <div className="row">
               <div className="col-md-12">
                 <TextInput
-                  label="Membership Number"
-                  name="membership_no"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  label="Email Address"
+                  name="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   size="lg"
                   placeholder="Enter Email Address"
+                  borderRadius
                 />
               </div>
               <div className="col-md-12">
@@ -63,13 +70,16 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   size="lg"
                   placeholder="Enter Password"
+                  borderRadius
                 />
               </div>
               <div className="col-md-12 mt-3">
-                <button type="submit" className="custom-btn">
-                  <span className="material-icons-sharp">login</span>
-                  LOGIN
-                </button>
+                <Button
+                  text="LOGIN"
+                  isLoading={loading}
+                  type="submit"
+                  icon="login"
+                />
               </div>
             </div>
           </div>

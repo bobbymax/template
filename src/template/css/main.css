@@ -1,4 +1,4 @@
-@import url("./style.css");
+@import url("./template.css");
 
 .guard {
   display: grid;
@@ -38,10 +38,10 @@
 }
 
 .label-font {
-  font-size: 1.045rem;
-  text-transform: uppercase;
+  font-size: 0.88rem;
   color: var(--color-dark);
-  margin-bottom: 0.58rem;
+  font-weight: 600;
+  margin-bottom: 0.28rem;
 }
 
 .form-login .row > div {
@@ -50,11 +50,34 @@
 
 .custom-btn {
   display: block;
-  background-color: var(--color-primary-variant);
   width: 100%;
   padding: 0.8rem;
   border-radius: var(--card-border-radius);
   color: var(--color-white);
+}
+
+.custom-btn__primary {
+  background-color: var(--color-danger);
+}
+
+.custom-btn__info {
+  background-color: rgb(100, 173, 202);
+}
+.custom-btn__dark {
+  background-color: rgb(22, 21, 21);
+  color: rgb(255, 208, 0) !important;
+}
+
+.custom-btn__default {
+  background-color: var(--color-danger);
+}
+
+.custom-btn__warning {
+  background-color: var(--color-orange);
+}
+
+.custom-btn__danger {
+  background-color: red;
 }
 
 .custom-btn span {
@@ -63,14 +86,19 @@
 }
 
 .custom-btn:hover {
-  background-color: var(--color-primary);
+  background-color: var(--color-warning);
 }
 
-.custom-btn:disabled {
-  background-color: var(--color-primary);
+.custom-btn__danger:hover {
+  background-color: rgb(255, 82, 82);
+}
+
+.custom-btn:disabled,
+.custom-btn__danger:disabled {
+  background-color: var(--color-info-dark);
 }
 
 .brand {
-  width: 30%;
+  width: 45%;
   margin: 0 auto 1.98rem auto;
 }

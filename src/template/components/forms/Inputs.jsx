@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 export const TextInput = ({
   multiline = 0,
   label = "",
@@ -7,6 +9,9 @@ export const TextInput = ({
   onChange,
   size = "",
   placeholder = "",
+  description = "",
+  borderRadius = false,
+  disabled = false,
 }) => {
   return (
     <div className="form-group">
@@ -17,13 +22,19 @@ export const TextInput = ({
               {label}
             </label>
           )}
+          {description !== "" && (
+            <small className="label-description">{description}</small>
+          )}
           <input
             name={name}
             type={type}
             value={value}
             onChange={onChange}
-            className={`form-control ${size === "lg" && "form-control-lg"}`}
+            className={`custom__form-control ${
+              borderRadius ? "custom__input-border-radius" : ""
+            } ${size === "lg" ? "custom__form-control-lg" : ""}`}
             placeholder={placeholder}
+            disabled={disabled}
           />
         </>
       ) : (
@@ -38,8 +49,9 @@ export const TextInput = ({
             rows={multiline}
             value={value}
             onChange={onChange}
-            className="form-control"
+            className="custom__form-control"
             placeholder={placeholder}
+            disabled={disabled}
           />
         </>
       )}
@@ -53,6 +65,7 @@ export const CustomSelect = ({
   onChange,
   children,
   size = "",
+  disabled = false,
 }) => {
   return (
     <div className="form-group">
@@ -66,6 +79,7 @@ export const CustomSelect = ({
         value={value}
         onChange={onChange}
         className={`form-control ${size === "lg" && "form-control-lg"}`}
+        disabled={disabled}
       >
         {children}
       </select>
@@ -103,6 +117,72 @@ export const Boxes = ({
         {label}
       </label>
     </div>
+  );
+};
+export const Button = ({
+  type = "button",
+  text,
+  isLoading = false,
+  icon = "",
+  disabled = false,
+  variant = "primary",
+  handleClick = undefined,
+}) => {
+  const [bgColor, setBgColor] = useState("");
+
+  useEffect(() => {
+    const colorCodes = [
+      {
+        name: "primary",
+        className: "custom-btn__primary",
+      },
+      {
+        name: "dark",
+        className: "custom-btn__dark",
+      },
+      {
+        name: "secondary",
+        className: "custom-btn__warning",
+      },
+      {
+        name: "success",
+        className: "custom-btn__success",
+      },
+      {
+        name: "danger",
+        className: "custom-btn__danger",
+      },
+      {
+        name: "info",
+        className: "custom-btn__info",
+      },
+    ];
+
+    const cr = colorCodes.filter((code) => code?.name === variant)[0];
+
+    setBgColor(cr?.className);
+  }, [variant]);
+
+  return (
+    <button
+      type={type}
+      className={`custom-btn mb-2 ${bgColor}`}
+      disabled={isLoading || disabled}
+      onClick={() => type === "button" && handleClick()}
+    >
+      {isLoading ? (
+        <span
+          className="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+      ) : (
+        <>
+          {icon !== "" && <span className="material-icons-sharp">{icon}</span>}
+          {text}
+        </>
+      )}
+    </button>
   );
 };
 export const ImageBox = () => {};

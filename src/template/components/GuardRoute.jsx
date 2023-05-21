@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/main.css";
 import bg from "../assets/images/login-bg.webp";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/ncdmb-logo.png";
 
 const GuardRoute = ({ children }) => {
   return (
@@ -17,7 +17,11 @@ const GuardRoute = ({ children }) => {
             <div className="col-md-12">
               <div className="auth">
                 <div className="brand">
-                  <img src={logo} alt="Brand Logo" />
+                  <img
+                    src={logo}
+                    style={{ width: "60%", margin: "0 auto" }}
+                    alt="Brand Logo"
+                  />
                 </div>
                 {children}
               </div>
